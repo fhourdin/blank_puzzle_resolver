@@ -1,0 +1,31 @@
+type Query {
+  pieces: [Piece!]!
+}
+
+type Mutation {
+  createPiece(connections: [ConnectionInput!]!): Piece
+  deletePieceById(id: ID!): Piece
+  deletePieceByIndex(index: Int!): Piece
+}
+
+input ConnectionInput {
+  male: Boolean!
+  shift: Int!
+  inclination: Int!
+}
+
+type Piece {
+  id: ID!
+  index: Int!
+  placed: Boolean!
+  connections: [Connection!]!
+}
+
+type Connection {
+  id: ID!
+  index: Int!
+  piece: Piece!
+  male: Boolean!
+  shift: Int!
+  inclination: Int!
+}

@@ -1,0 +1,16 @@
+type Piece {
+  id: ID! @id
+  index: Int! @unique
+  placed: Boolean! @default(value: false)
+  connections: [Connection!]!
+    @relation(name: "PieceConnections", onDelete: CASCADE)
+}
+
+type Connection {
+  id: ID! @id
+  index: Int!
+  piece: Piece! @relation(name: "PieceConnections", onDelete: SET_NULL)
+  male: Boolean!
+  shift: Int!
+  inclination: Int!
+}
