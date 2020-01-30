@@ -3,9 +3,10 @@ type Query {
 }
 
 type Mutation {
-  createPiece(connections: [ConnectionInput!]!): Piece
+  createPiece(index: Int, connections: [ConnectionInput!]!): Piece
   deletePieceById(id: ID!): Piece
   deletePieceByIndex(index: Int!): Piece
+  deleteLastPiece: Piece
 }
 
 input ConnectionInput {

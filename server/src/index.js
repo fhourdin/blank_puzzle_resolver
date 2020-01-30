@@ -4,7 +4,7 @@ const { GraphQLServer } = require("graphql-yoga");
 const resolvers = {
   Query: {
     pieces(root, args, context) {
-      return context.prisma.pieces();
+      return context.prisma.pieces({ orderBy: "index_DESC", ...args });
     }
   },
   Mutation: {
@@ -12,18 +12,25 @@ const resolvers = {
       if (args.connections.length !== 4) {
         throw Error("Piece should have 4 connections");
       }
+      let pieceIndex = null;
+      if (args.index === undefined) {
+        const lastPiece = await context.prisma
+          .pieces({ orderBy: "index_DESC", first: 1 })
+          .index();
+        console.log(lastPiece[0].index);
 
-      const lastPiece = await context.prisma
-        .pieces({ orderBy: "index_DESC", last: 1 })
-        .index();
-      const newIndex = lastPiece.length > 0 ? lastPiece[0].index + 1 : 0;
+        pieceIndex = lastPiece.length > 0 ? lastPiece[0].index + 1 : 0;
+      } else {
+        pieceIndex = args.index;
+      }
+
       const newConnections = args.connections.map((connection, index) => ({
         ...connection,
         index
       }));
 
       return context.prisma.createPiece({
-        index: newIndex,
+        index: pieceIndex,
         connections: { create: newConnections }
       });
     },
@@ -32,6 +39,18 @@ const resolvers = {
     },
     deletePieceByIndex(root, args, context) {
       return context.prisma.deletePiece({ index: args.index });
+    },
+    deleteLastPiece: async (root, args, context) => {
+      const query = await context.prisma.pieces({
+        orderBy: "index_DESC",
+        first: 1
+      });
+
+      if (query.length === 0) {
+        throw Error("There is nothing to delete");
+      }
+
+      return context.prisma.deletePiece({ id: query[0].id });
     }
   },
   Piece: {
