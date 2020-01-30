@@ -20,8 +20,8 @@ type Connection {
   index: Int!
   piece: Piece!
   male: Boolean!
-  shift: Int!
-  inclination: Int!
+  shift: Direction!
+  inclination: Direction!
 }
 
 type ConnectionConnection {
@@ -35,8 +35,8 @@ input ConnectionCreateInput {
   index: Int!
   piece: PieceCreateOneWithoutConnectionsInput!
   male: Boolean!
-  shift: Int!
-  inclination: Int!
+  shift: Direction!
+  inclination: Direction!
 }
 
 input ConnectionCreateManyWithoutPieceInput {
@@ -48,8 +48,8 @@ input ConnectionCreateWithoutPieceInput {
   id: ID
   index: Int!
   male: Boolean!
-  shift: Int!
-  inclination: Int!
+  shift: Direction!
+  inclination: Direction!
 }
 
 type ConnectionEdge {
@@ -74,8 +74,8 @@ type ConnectionPreviousValues {
   id: ID!
   index: Int!
   male: Boolean!
-  shift: Int!
-  inclination: Int!
+  shift: Direction!
+  inclination: Direction!
 }
 
 input ConnectionScalarWhereInput {
@@ -103,22 +103,14 @@ input ConnectionScalarWhereInput {
   index_gte: Int
   male: Boolean
   male_not: Boolean
-  shift: Int
-  shift_not: Int
-  shift_in: [Int!]
-  shift_not_in: [Int!]
-  shift_lt: Int
-  shift_lte: Int
-  shift_gt: Int
-  shift_gte: Int
-  inclination: Int
-  inclination_not: Int
-  inclination_in: [Int!]
-  inclination_not_in: [Int!]
-  inclination_lt: Int
-  inclination_lte: Int
-  inclination_gt: Int
-  inclination_gte: Int
+  shift: Direction
+  shift_not: Direction
+  shift_in: [Direction!]
+  shift_not_in: [Direction!]
+  inclination: Direction
+  inclination_not: Direction
+  inclination_in: [Direction!]
+  inclination_not_in: [Direction!]
   AND: [ConnectionScalarWhereInput!]
   OR: [ConnectionScalarWhereInput!]
   NOT: [ConnectionScalarWhereInput!]
@@ -146,22 +138,22 @@ input ConnectionUpdateInput {
   index: Int
   piece: PieceUpdateOneRequiredWithoutConnectionsInput
   male: Boolean
-  shift: Int
-  inclination: Int
+  shift: Direction
+  inclination: Direction
 }
 
 input ConnectionUpdateManyDataInput {
   index: Int
   male: Boolean
-  shift: Int
-  inclination: Int
+  shift: Direction
+  inclination: Direction
 }
 
 input ConnectionUpdateManyMutationInput {
   index: Int
   male: Boolean
-  shift: Int
-  inclination: Int
+  shift: Direction
+  inclination: Direction
 }
 
 input ConnectionUpdateManyWithoutPieceInput {
@@ -184,8 +176,8 @@ input ConnectionUpdateManyWithWhereNestedInput {
 input ConnectionUpdateWithoutPieceDataInput {
   index: Int
   male: Boolean
-  shift: Int
-  inclination: Int
+  shift: Direction
+  inclination: Direction
 }
 
 input ConnectionUpdateWithWhereUniqueWithoutPieceInput {
@@ -225,22 +217,14 @@ input ConnectionWhereInput {
   piece: PieceWhereInput
   male: Boolean
   male_not: Boolean
-  shift: Int
-  shift_not: Int
-  shift_in: [Int!]
-  shift_not_in: [Int!]
-  shift_lt: Int
-  shift_lte: Int
-  shift_gt: Int
-  shift_gte: Int
-  inclination: Int
-  inclination_not: Int
-  inclination_in: [Int!]
-  inclination_not_in: [Int!]
-  inclination_lt: Int
-  inclination_lte: Int
-  inclination_gt: Int
-  inclination_gte: Int
+  shift: Direction
+  shift_not: Direction
+  shift_in: [Direction!]
+  shift_not_in: [Direction!]
+  inclination: Direction
+  inclination_not: Direction
+  inclination_in: [Direction!]
+  inclination_not_in: [Direction!]
   AND: [ConnectionWhereInput!]
   OR: [ConnectionWhereInput!]
   NOT: [ConnectionWhereInput!]
@@ -248,6 +232,12 @@ input ConnectionWhereInput {
 
 input ConnectionWhereUniqueInput {
   id: ID
+}
+
+enum Direction {
+  LEFT
+  CENTER
+  RIGHT
 }
 
 scalar Long

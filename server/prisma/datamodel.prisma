@@ -11,6 +11,12 @@ type Connection {
   index: Int!
   piece: Piece! @relation(name: "PieceConnections", onDelete: SET_NULL)
   male: Boolean!
-  shift: Int!
-  inclination: Int!
+  shift: Direction!
+  inclination: Direction!
+}
+
+enum Direction {
+  LEFT
+  CENTER
+  RIGHT
 }

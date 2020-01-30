@@ -140,6 +140,8 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type Direction = "LEFT" | "CENTER" | "RIGHT";
+
 export type ConnectionOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -192,22 +194,14 @@ export interface ConnectionWhereInput {
   piece?: Maybe<PieceWhereInput>;
   male?: Maybe<Boolean>;
   male_not?: Maybe<Boolean>;
-  shift?: Maybe<Int>;
-  shift_not?: Maybe<Int>;
-  shift_in?: Maybe<Int[] | Int>;
-  shift_not_in?: Maybe<Int[] | Int>;
-  shift_lt?: Maybe<Int>;
-  shift_lte?: Maybe<Int>;
-  shift_gt?: Maybe<Int>;
-  shift_gte?: Maybe<Int>;
-  inclination?: Maybe<Int>;
-  inclination_not?: Maybe<Int>;
-  inclination_in?: Maybe<Int[] | Int>;
-  inclination_not_in?: Maybe<Int[] | Int>;
-  inclination_lt?: Maybe<Int>;
-  inclination_lte?: Maybe<Int>;
-  inclination_gt?: Maybe<Int>;
-  inclination_gte?: Maybe<Int>;
+  shift?: Maybe<Direction>;
+  shift_not?: Maybe<Direction>;
+  shift_in?: Maybe<Direction[] | Direction>;
+  shift_not_in?: Maybe<Direction[] | Direction>;
+  inclination?: Maybe<Direction>;
+  inclination_not?: Maybe<Direction>;
+  inclination_in?: Maybe<Direction[] | Direction>;
+  inclination_not_in?: Maybe<Direction[] | Direction>;
   AND?: Maybe<ConnectionWhereInput[] | ConnectionWhereInput>;
   OR?: Maybe<ConnectionWhereInput[] | ConnectionWhereInput>;
   NOT?: Maybe<ConnectionWhereInput[] | ConnectionWhereInput>;
@@ -256,8 +250,8 @@ export interface ConnectionCreateInput {
   index: Int;
   piece: PieceCreateOneWithoutConnectionsInput;
   male: Boolean;
-  shift: Int;
-  inclination: Int;
+  shift: Direction;
+  inclination: Direction;
 }
 
 export interface PieceCreateOneWithoutConnectionsInput {
@@ -275,8 +269,8 @@ export interface ConnectionUpdateInput {
   index?: Maybe<Int>;
   piece?: Maybe<PieceUpdateOneRequiredWithoutConnectionsInput>;
   male?: Maybe<Boolean>;
-  shift?: Maybe<Int>;
-  inclination?: Maybe<Int>;
+  shift?: Maybe<Direction>;
+  inclination?: Maybe<Direction>;
 }
 
 export interface PieceUpdateOneRequiredWithoutConnectionsInput {
@@ -299,8 +293,8 @@ export interface PieceUpsertWithoutConnectionsInput {
 export interface ConnectionUpdateManyMutationInput {
   index?: Maybe<Int>;
   male?: Maybe<Boolean>;
-  shift?: Maybe<Int>;
-  inclination?: Maybe<Int>;
+  shift?: Maybe<Direction>;
+  inclination?: Maybe<Direction>;
 }
 
 export interface PieceCreateInput {
@@ -321,8 +315,8 @@ export interface ConnectionCreateWithoutPieceInput {
   id?: Maybe<ID_Input>;
   index: Int;
   male: Boolean;
-  shift: Int;
-  inclination: Int;
+  shift: Direction;
+  inclination: Direction;
 }
 
 export interface PieceUpdateInput {
@@ -362,8 +356,8 @@ export interface ConnectionUpdateWithWhereUniqueWithoutPieceInput {
 export interface ConnectionUpdateWithoutPieceDataInput {
   index?: Maybe<Int>;
   male?: Maybe<Boolean>;
-  shift?: Maybe<Int>;
-  inclination?: Maybe<Int>;
+  shift?: Maybe<Direction>;
+  inclination?: Maybe<Direction>;
 }
 
 export interface ConnectionUpsertWithWhereUniqueWithoutPieceInput {
@@ -397,22 +391,14 @@ export interface ConnectionScalarWhereInput {
   index_gte?: Maybe<Int>;
   male?: Maybe<Boolean>;
   male_not?: Maybe<Boolean>;
-  shift?: Maybe<Int>;
-  shift_not?: Maybe<Int>;
-  shift_in?: Maybe<Int[] | Int>;
-  shift_not_in?: Maybe<Int[] | Int>;
-  shift_lt?: Maybe<Int>;
-  shift_lte?: Maybe<Int>;
-  shift_gt?: Maybe<Int>;
-  shift_gte?: Maybe<Int>;
-  inclination?: Maybe<Int>;
-  inclination_not?: Maybe<Int>;
-  inclination_in?: Maybe<Int[] | Int>;
-  inclination_not_in?: Maybe<Int[] | Int>;
-  inclination_lt?: Maybe<Int>;
-  inclination_lte?: Maybe<Int>;
-  inclination_gt?: Maybe<Int>;
-  inclination_gte?: Maybe<Int>;
+  shift?: Maybe<Direction>;
+  shift_not?: Maybe<Direction>;
+  shift_in?: Maybe<Direction[] | Direction>;
+  shift_not_in?: Maybe<Direction[] | Direction>;
+  inclination?: Maybe<Direction>;
+  inclination_not?: Maybe<Direction>;
+  inclination_in?: Maybe<Direction[] | Direction>;
+  inclination_not_in?: Maybe<Direction[] | Direction>;
   AND?: Maybe<ConnectionScalarWhereInput[] | ConnectionScalarWhereInput>;
   OR?: Maybe<ConnectionScalarWhereInput[] | ConnectionScalarWhereInput>;
   NOT?: Maybe<ConnectionScalarWhereInput[] | ConnectionScalarWhereInput>;
@@ -426,8 +412,8 @@ export interface ConnectionUpdateManyWithWhereNestedInput {
 export interface ConnectionUpdateManyDataInput {
   index?: Maybe<Int>;
   male?: Maybe<Boolean>;
-  shift?: Maybe<Int>;
-  inclination?: Maybe<Int>;
+  shift?: Maybe<Direction>;
+  inclination?: Maybe<Direction>;
 }
 
 export interface PieceUpdateManyMutationInput {
@@ -471,8 +457,8 @@ export interface Connection {
   id: ID_Output;
   index: Int;
   male: Boolean;
-  shift: Int;
-  inclination: Int;
+  shift: Direction;
+  inclination: Direction;
 }
 
 export interface ConnectionPromise extends Promise<Connection>, Fragmentable {
@@ -480,8 +466,8 @@ export interface ConnectionPromise extends Promise<Connection>, Fragmentable {
   index: () => Promise<Int>;
   piece: <T = PiecePromise>() => T;
   male: () => Promise<Boolean>;
-  shift: () => Promise<Int>;
-  inclination: () => Promise<Int>;
+  shift: () => Promise<Direction>;
+  inclination: () => Promise<Direction>;
 }
 
 export interface ConnectionSubscription
@@ -491,8 +477,8 @@ export interface ConnectionSubscription
   index: () => Promise<AsyncIterator<Int>>;
   piece: <T = PieceSubscription>() => T;
   male: () => Promise<AsyncIterator<Boolean>>;
-  shift: () => Promise<AsyncIterator<Int>>;
-  inclination: () => Promise<AsyncIterator<Int>>;
+  shift: () => Promise<AsyncIterator<Direction>>;
+  inclination: () => Promise<AsyncIterator<Direction>>;
 }
 
 export interface ConnectionNullablePromise
@@ -502,8 +488,8 @@ export interface ConnectionNullablePromise
   index: () => Promise<Int>;
   piece: <T = PiecePromise>() => T;
   male: () => Promise<Boolean>;
-  shift: () => Promise<Int>;
-  inclination: () => Promise<Int>;
+  shift: () => Promise<Direction>;
+  inclination: () => Promise<Direction>;
 }
 
 export interface Piece {
@@ -739,8 +725,8 @@ export interface ConnectionPreviousValues {
   id: ID_Output;
   index: Int;
   male: Boolean;
-  shift: Int;
-  inclination: Int;
+  shift: Direction;
+  inclination: Direction;
 }
 
 export interface ConnectionPreviousValuesPromise
@@ -749,8 +735,8 @@ export interface ConnectionPreviousValuesPromise
   id: () => Promise<ID_Output>;
   index: () => Promise<Int>;
   male: () => Promise<Boolean>;
-  shift: () => Promise<Int>;
-  inclination: () => Promise<Int>;
+  shift: () => Promise<Direction>;
+  inclination: () => Promise<Direction>;
 }
 
 export interface ConnectionPreviousValuesSubscription
@@ -759,8 +745,8 @@ export interface ConnectionPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   index: () => Promise<AsyncIterator<Int>>;
   male: () => Promise<AsyncIterator<Boolean>>;
-  shift: () => Promise<AsyncIterator<Int>>;
-  inclination: () => Promise<AsyncIterator<Int>>;
+  shift: () => Promise<AsyncIterator<Direction>>;
+  inclination: () => Promise<AsyncIterator<Direction>>;
 }
 
 export interface PieceSubscriptionPayload {
@@ -844,6 +830,10 @@ export const models: Model[] = [
   },
   {
     name: "Connection",
+    embedded: false
+  },
+  {
+    name: "Direction",
     embedded: false
   }
 ];

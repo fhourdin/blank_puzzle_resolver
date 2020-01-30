@@ -11,8 +11,8 @@ type Mutation {
 
 input ConnectionInput {
   male: Boolean!
-  shift: Int!
-  inclination: Int!
+  shift: Direction!
+  inclination: Direction!
 }
 
 type Piece {
@@ -27,6 +27,12 @@ type Connection {
   index: Int!
   piece: Piece!
   male: Boolean!
-  shift: Int!
-  inclination: Int!
+  shift: Direction!
+  inclination: Direction!
+}
+
+enum Direction {
+  LEFT
+  CENTER
+  RIGHT
 }
