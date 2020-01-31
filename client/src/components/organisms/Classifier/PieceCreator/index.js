@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { makeStyles, Typography } from '@material-ui/core'
 import PiecePreview from './PiecePreview'
+import PieceForm from './PieceForm'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(10),
   },
   piecePreviewContainer: {
-    flex: 2,
+    flex: 1,
     display: 'flex',
     alignItems: 'center',
   },
@@ -28,7 +29,9 @@ const PieceCreator = () => {
       <div className={classes.piecePreviewContainer}>
         <PiecePreview piece={piece} />
       </div>
-      <div className={classes.pieceForm}></div>
+      <div className={classes.pieceForm}>
+        <PieceForm piece={piece} setPiece={setPiece} />
+      </div>
     </div>
   )
 }
