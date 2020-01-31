@@ -140,13 +140,15 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type Position = "UP" | "RIGHT" | "BOTTOM" | "LEFT";
+
 export type Direction = "LEFT" | "CENTER" | "RIGHT";
 
 export type ConnectionOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "index_ASC"
-  | "index_DESC"
+  | "position_ASC"
+  | "position_DESC"
   | "male_ASC"
   | "male_DESC"
   | "shift_ASC"
@@ -183,15 +185,11 @@ export interface ConnectionWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  index?: Maybe<Int>;
-  index_not?: Maybe<Int>;
-  index_in?: Maybe<Int[] | Int>;
-  index_not_in?: Maybe<Int[] | Int>;
-  index_lt?: Maybe<Int>;
-  index_lte?: Maybe<Int>;
-  index_gt?: Maybe<Int>;
-  index_gte?: Maybe<Int>;
   piece?: Maybe<PieceWhereInput>;
+  position?: Maybe<Position>;
+  position_not?: Maybe<Position>;
+  position_in?: Maybe<Position[] | Position>;
+  position_not_in?: Maybe<Position[] | Position>;
   male?: Maybe<Boolean>;
   male_not?: Maybe<Boolean>;
   shift?: Maybe<Direction>;
@@ -247,8 +245,8 @@ export type PieceWhereUniqueInput = AtLeastOne<{
 
 export interface ConnectionCreateInput {
   id?: Maybe<ID_Input>;
-  index: Int;
   piece: PieceCreateOneWithoutConnectionsInput;
+  position: Position;
   male: Boolean;
   shift: Direction;
   inclination: Direction;
@@ -266,8 +264,8 @@ export interface PieceCreateWithoutConnectionsInput {
 }
 
 export interface ConnectionUpdateInput {
-  index?: Maybe<Int>;
   piece?: Maybe<PieceUpdateOneRequiredWithoutConnectionsInput>;
+  position?: Maybe<Position>;
   male?: Maybe<Boolean>;
   shift?: Maybe<Direction>;
   inclination?: Maybe<Direction>;
@@ -291,7 +289,7 @@ export interface PieceUpsertWithoutConnectionsInput {
 }
 
 export interface ConnectionUpdateManyMutationInput {
-  index?: Maybe<Int>;
+  position?: Maybe<Position>;
   male?: Maybe<Boolean>;
   shift?: Maybe<Direction>;
   inclination?: Maybe<Direction>;
@@ -313,7 +311,7 @@ export interface ConnectionCreateManyWithoutPieceInput {
 
 export interface ConnectionCreateWithoutPieceInput {
   id?: Maybe<ID_Input>;
-  index: Int;
+  position: Position;
   male: Boolean;
   shift: Direction;
   inclination: Direction;
@@ -354,7 +352,7 @@ export interface ConnectionUpdateWithWhereUniqueWithoutPieceInput {
 }
 
 export interface ConnectionUpdateWithoutPieceDataInput {
-  index?: Maybe<Int>;
+  position?: Maybe<Position>;
   male?: Maybe<Boolean>;
   shift?: Maybe<Direction>;
   inclination?: Maybe<Direction>;
@@ -381,14 +379,10 @@ export interface ConnectionScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  index?: Maybe<Int>;
-  index_not?: Maybe<Int>;
-  index_in?: Maybe<Int[] | Int>;
-  index_not_in?: Maybe<Int[] | Int>;
-  index_lt?: Maybe<Int>;
-  index_lte?: Maybe<Int>;
-  index_gt?: Maybe<Int>;
-  index_gte?: Maybe<Int>;
+  position?: Maybe<Position>;
+  position_not?: Maybe<Position>;
+  position_in?: Maybe<Position[] | Position>;
+  position_not_in?: Maybe<Position[] | Position>;
   male?: Maybe<Boolean>;
   male_not?: Maybe<Boolean>;
   shift?: Maybe<Direction>;
@@ -410,7 +404,7 @@ export interface ConnectionUpdateManyWithWhereNestedInput {
 }
 
 export interface ConnectionUpdateManyDataInput {
-  index?: Maybe<Int>;
+  position?: Maybe<Position>;
   male?: Maybe<Boolean>;
   shift?: Maybe<Direction>;
   inclination?: Maybe<Direction>;
@@ -455,7 +449,7 @@ export interface NodeNode {
 
 export interface Connection {
   id: ID_Output;
-  index: Int;
+  position: Position;
   male: Boolean;
   shift: Direction;
   inclination: Direction;
@@ -463,8 +457,8 @@ export interface Connection {
 
 export interface ConnectionPromise extends Promise<Connection>, Fragmentable {
   id: () => Promise<ID_Output>;
-  index: () => Promise<Int>;
   piece: <T = PiecePromise>() => T;
+  position: () => Promise<Position>;
   male: () => Promise<Boolean>;
   shift: () => Promise<Direction>;
   inclination: () => Promise<Direction>;
@@ -474,8 +468,8 @@ export interface ConnectionSubscription
   extends Promise<AsyncIterator<Connection>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  index: () => Promise<AsyncIterator<Int>>;
   piece: <T = PieceSubscription>() => T;
+  position: () => Promise<AsyncIterator<Position>>;
   male: () => Promise<AsyncIterator<Boolean>>;
   shift: () => Promise<AsyncIterator<Direction>>;
   inclination: () => Promise<AsyncIterator<Direction>>;
@@ -485,8 +479,8 @@ export interface ConnectionNullablePromise
   extends Promise<Connection | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  index: () => Promise<Int>;
   piece: <T = PiecePromise>() => T;
+  position: () => Promise<Position>;
   male: () => Promise<Boolean>;
   shift: () => Promise<Direction>;
   inclination: () => Promise<Direction>;
@@ -723,7 +717,7 @@ export interface ConnectionSubscriptionPayloadSubscription
 
 export interface ConnectionPreviousValues {
   id: ID_Output;
-  index: Int;
+  position: Position;
   male: Boolean;
   shift: Direction;
   inclination: Direction;
@@ -733,7 +727,7 @@ export interface ConnectionPreviousValuesPromise
   extends Promise<ConnectionPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  index: () => Promise<Int>;
+  position: () => Promise<Position>;
   male: () => Promise<Boolean>;
   shift: () => Promise<Direction>;
   inclination: () => Promise<Direction>;
@@ -743,7 +737,7 @@ export interface ConnectionPreviousValuesSubscription
   extends Promise<AsyncIterator<ConnectionPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  index: () => Promise<AsyncIterator<Int>>;
+  position: () => Promise<AsyncIterator<Position>>;
   male: () => Promise<AsyncIterator<Boolean>>;
   shift: () => Promise<AsyncIterator<Direction>>;
   inclination: () => Promise<AsyncIterator<Direction>>;
@@ -834,6 +828,10 @@ export const models: Model[] = [
   },
   {
     name: "Direction",
+    embedded: false
+  },
+  {
+    name: "Position",
     embedded: false
   }
 ];

@@ -1,5 +1,5 @@
 type Query {
-  pieces: [Piece!]!
+  pieces(orderBy: String, last: Int, first: Int): [Piece!]!
 }
 
 type Mutation {
@@ -13,6 +13,7 @@ input ConnectionInput {
   male: Boolean!
   shift: Direction!
   inclination: Direction!
+  position: Position!
 }
 
 type Piece {
@@ -24,8 +25,8 @@ type Piece {
 
 type Connection {
   id: ID!
-  index: Int!
   piece: Piece!
+  position: Position!
   male: Boolean!
   shift: Direction!
   inclination: Direction!
@@ -35,4 +36,11 @@ enum Direction {
   LEFT
   CENTER
   RIGHT
+}
+
+enum Position {
+  UP
+  RIGHT
+  BOTTOM
+  LEFT
 }

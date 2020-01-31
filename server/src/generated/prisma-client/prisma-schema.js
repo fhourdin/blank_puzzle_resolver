@@ -17,8 +17,8 @@ type BatchPayload {
 
 type Connection {
   id: ID!
-  index: Int!
   piece: Piece!
+  position: Position!
   male: Boolean!
   shift: Direction!
   inclination: Direction!
@@ -32,8 +32,8 @@ type ConnectionConnection {
 
 input ConnectionCreateInput {
   id: ID
-  index: Int!
   piece: PieceCreateOneWithoutConnectionsInput!
+  position: Position!
   male: Boolean!
   shift: Direction!
   inclination: Direction!
@@ -46,7 +46,7 @@ input ConnectionCreateManyWithoutPieceInput {
 
 input ConnectionCreateWithoutPieceInput {
   id: ID
-  index: Int!
+  position: Position!
   male: Boolean!
   shift: Direction!
   inclination: Direction!
@@ -60,8 +60,8 @@ type ConnectionEdge {
 enum ConnectionOrderByInput {
   id_ASC
   id_DESC
-  index_ASC
-  index_DESC
+  position_ASC
+  position_DESC
   male_ASC
   male_DESC
   shift_ASC
@@ -72,7 +72,7 @@ enum ConnectionOrderByInput {
 
 type ConnectionPreviousValues {
   id: ID!
-  index: Int!
+  position: Position!
   male: Boolean!
   shift: Direction!
   inclination: Direction!
@@ -93,14 +93,10 @@ input ConnectionScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  index: Int
-  index_not: Int
-  index_in: [Int!]
-  index_not_in: [Int!]
-  index_lt: Int
-  index_lte: Int
-  index_gt: Int
-  index_gte: Int
+  position: Position
+  position_not: Position
+  position_in: [Position!]
+  position_not_in: [Position!]
   male: Boolean
   male_not: Boolean
   shift: Direction
@@ -135,22 +131,22 @@ input ConnectionSubscriptionWhereInput {
 }
 
 input ConnectionUpdateInput {
-  index: Int
   piece: PieceUpdateOneRequiredWithoutConnectionsInput
+  position: Position
   male: Boolean
   shift: Direction
   inclination: Direction
 }
 
 input ConnectionUpdateManyDataInput {
-  index: Int
+  position: Position
   male: Boolean
   shift: Direction
   inclination: Direction
 }
 
 input ConnectionUpdateManyMutationInput {
-  index: Int
+  position: Position
   male: Boolean
   shift: Direction
   inclination: Direction
@@ -174,7 +170,7 @@ input ConnectionUpdateManyWithWhereNestedInput {
 }
 
 input ConnectionUpdateWithoutPieceDataInput {
-  index: Int
+  position: Position
   male: Boolean
   shift: Direction
   inclination: Direction
@@ -206,15 +202,11 @@ input ConnectionWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  index: Int
-  index_not: Int
-  index_in: [Int!]
-  index_not_in: [Int!]
-  index_lt: Int
-  index_lte: Int
-  index_gt: Int
-  index_gte: Int
   piece: PieceWhereInput
+  position: Position
+  position_not: Position
+  position_in: [Position!]
+  position_not_in: [Position!]
   male: Boolean
   male_not: Boolean
   shift: Direction
@@ -407,6 +399,13 @@ input PieceWhereInput {
 input PieceWhereUniqueInput {
   id: ID
   index: Int
+}
+
+enum Position {
+  UP
+  RIGHT
+  BOTTOM
+  LEFT
 }
 
 type Query {

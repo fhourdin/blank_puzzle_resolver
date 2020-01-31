@@ -15,6 +15,10 @@ var models = [
   {
     name: "Direction",
     embedded: false
+  },
+  {
+    name: "Position",
+    embedded: false
   }
 ];
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
